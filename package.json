@@ -1,0 +1,38 @@
+{
+  "name": "shortcut-sheet-generator",
+  "version": "1.0.0",
+  "description": "Shortcut sheet generator for games, apps and other uses",
+  "author": "Carl Giesberts <carl@front-crafter.nl>",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit",
+    "test:watch": "npm run test:unit -- --watch",
+    "app": "go run ssg.go",
+    "gotest": "go test ./..."
+  },
+  "dependencies": {
+    "@vuelidate/core": "^2.0.0",
+    "@vuelidate/validators": "^2.0.0",
+    "axios": "^0.21.4",
+    "date-fns": "^2.8.1",
+    "mitt": "^3.0.0",
+    "vue": "^3.2.31",
+    "vue-router": "4.0.5",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@vue/cli-plugin-babel": "~5.0.1",
+    "@vue/cli-plugin-typescript": "~5.0.1",
+    "@vue/cli-service": "~5.0.1",
+    "@vue/compiler-sfc": "^3.2.31",
+    "jest": "^24.9.0",
+    "less": "^4.1.1",
+    "less-loader": "^7.3.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "~4.5.5"
+  }
+}
