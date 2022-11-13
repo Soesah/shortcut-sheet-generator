@@ -2,6 +2,7 @@
 import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import { Actions } from '@/store';
+import Card from '@/components/common/Card.vue';
 
 const store = useStore();
 
@@ -12,7 +13,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div>
+  <Card>
     <h2>Sheets</h2>
     <ul>
       <li v-for="sheet in sheets" :key="sheet.id">
@@ -21,5 +22,5 @@ onMounted(() => {
         }}</RouterLink>
       </li>
     </ul>
-  </div>
+  </Card>
 </template>

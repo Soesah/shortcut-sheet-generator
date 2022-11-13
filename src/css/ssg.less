@@ -1,5 +1,9 @@
+@import 'variables.less';
 @import 'fonts.less';
 @import 'headers.less';
+@import 'card.less';
+@import 'drawer.less';
+@import 'tooltip.less';
 
 html, body {
   padding: 0;
@@ -7,6 +11,11 @@ html, body {
 }
 
 body {
-  padding: 20px;
+  padding: @size-medium;
   .font-default();
+}
+
+main {
+  max-width: 80%;
+  margin: 0 auto;
 }

@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import { Mutations } from '@/store';
-import { Notification } from '@/models/notification';
+import { Notification } from '@/models/notification.model';
 import Message from './Message.vue';
 
 const store = useStore();
