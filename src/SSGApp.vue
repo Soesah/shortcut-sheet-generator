@@ -1,11 +1,13 @@
 <script lang="ts" setup></script>
 <template>
   <div>
-    <header></header>
+    <header>
+      <h1>Shortcut Sheets</h1>
+    </header>
     <main>
       <RouterView />
     </main>
-    <footer></footer>
+    <footer>Carl Giesberts - 2022</footer>
   </div>
 </template>
 <style src="@/css/ssg.less" lang="less"></style>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SheetSelector from '@/components/SheetSelector.vue';
+import SheetList from '@/components/SheetList.vue';
 import { Actions, store } from './store';
 
 export const router = createRouter({
@@ -7,11 +7,11 @@ export const router = createRouter({
   routes: [
     {
       path: '/*',
-      component: SheetSelector,
+      component: SheetList,
     },
     {
       path: '/',
-      component: SheetSelector,
+      component: SheetList,
     },
   ],
 });
