@@ -36,6 +36,9 @@ func main() {
 			r.Route("/sheets", func(r chi.Router) {
 				r.Use(middlewares.NoCache)
 				r.Get("/", handlers.GetSheetList)
+				r.Post("/", handlers.CreateSheet)
+				r.Post("/{sheetID}", handlers.AddShortCut)
+				r.Put("/{sheetID}", handlers.UpdateSheet)
 			})
 		})
 

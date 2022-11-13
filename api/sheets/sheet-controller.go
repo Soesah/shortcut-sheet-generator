@@ -10,9 +10,9 @@ import (
 )
 
 var (
-	errNotInitialized = errors.New("Controller not initialized")
-	errNoSheetsToSave = errors.New("No sheets to save")
-	errSheetNotFound  = errors.New("Sheet not found, name incorrect")
+	errNotInitialized = errors.New("controller not initialized")
+	errNoSheetsToSave = errors.New("no sheets to save")
+	errSheetNotFound  = errors.New("sheet not found, name incorrect")
 )
 
 // Controller is a controller for the database
@@ -87,10 +87,6 @@ func (c *Controller) getNewID() int64 {
 
 // AddSheet adds a sheet to the database
 func (c *Controller) AddSheet(b models.Sheet) (models.Sheet, error) {
-
-	if len(c.Sheets) == 0 {
-		return b, errNotInitialized
-	}
 
 	b.ID = c.getNewID()
 
