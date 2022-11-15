@@ -24,3 +24,17 @@ func (s *Sheet) AddShortCut(shortCut ShortCut) {
 	shortCut.ID = s.getNewID()
 	s.ShortCuts = append(s.ShortCuts, shortCut)
 }
+
+func (s *Sheet) UpdateShortCut(shortCutID int64, shortCut ShortCut) {
+	var shortCuts []ShortCut
+
+	for _, h := range s.ShortCuts {
+		if h.ID == shortCutID {
+			shortCuts = append(shortCuts, shortCut)
+		} else {
+			shortCuts = append(shortCuts, h)
+		}
+	}
+
+	s.ShortCuts = shortCuts
+}

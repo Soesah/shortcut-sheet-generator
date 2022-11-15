@@ -38,6 +38,7 @@ func main() {
 				r.Get("/", handlers.GetSheetList)
 				r.Post("/", handlers.CreateSheet)
 				r.Post("/{sheetID}", handlers.AddShortCut)
+				r.Post("/{sheetID}/{shortCutID}", handlers.UpdateShortCut)
 				r.Put("/{sheetID}", handlers.UpdateSheet)
 			})
 		})

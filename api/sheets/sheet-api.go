@@ -122,6 +122,45 @@ func AddShortCut(sheetID int64, shortCut models.ShortCut, r *http.Request) (mode
 	return sheet, nil
 }
 
+// UpdateShortCut adds a shortcut to the sheet
+func UpdateShortCut(sheetID int64, shortCutID int64, shortCut models.ShortCut, r *http.Request) (models.Sheet, error) {
+
+	var sheet models.Sheet
+
+	if shortCut.Description == "" {
+		return sheet, errCreateInvalidSheet
+	}
+
+	c := Controller{}
+	err := c.Load(r)
+
+	if err != nil {
+		return sheet, err
+	}
+
+	sheet, err = c.GetSheet(sheetID)
+
+	if err != nil {
+		return sheet, err
+	}
+
+	sheet.UpdateShortCut(shortCutID, shortCut)
+
+	err = c.UpdateSheet(sheet)
+
+	if err != nil {
+		return sheet, err
+	}
+
+	err = c.Store(r)
+
+	if err != nil {
+		return sheet, err
+	}
+
+	return sheet, nil
+}
+
 // Store updates a sheet
 func Store(sheet models.Sheet, r *http.Request) (models.Sheet, error) {
 	// if !sheet.IsValid() {

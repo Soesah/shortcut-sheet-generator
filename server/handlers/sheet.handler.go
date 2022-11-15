@@ -82,3 +82,26 @@ func AddShortCut(w http.ResponseWriter, r *http.Request) {
 
 	httpext.JSON(w, ss)
 }
+
+func UpdateShortCut(w http.ResponseWriter, r *http.Request) {
+	sheetID, err := strconv.Atoi(chi.URLParam(r, "sheetID"))
+	shortCutID, err := strconv.Atoi(chi.URLParam(r, "shortCutID"))
+
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	decoder := json.NewDecoder(r.Body)
+	var s models.ShortCut
+	_ = decoder.Decode(&s)
+
+	ss, err := sheets.UpdateShortCut(int64(sheetID), int64(shortCutID), s, r)
+
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	httpext.JSON(w, ss)
+}
