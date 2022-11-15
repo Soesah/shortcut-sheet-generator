@@ -16,6 +16,8 @@ const { data } = defineProps({
 
 let shortCut = reactive<ShortCut>({ ...data.shortCut });
 
+const emit = defineEmits(['close']);
+
 // const $v = useVuelidate(userValidations, profile);
 
 const submit = () => {
@@ -24,6 +26,7 @@ const submit = () => {
   } else {
     store.dispatch(Actions.CreateShortcut, shortCut);
   }
+  emit('close');
 };
 </script>
 <template>
