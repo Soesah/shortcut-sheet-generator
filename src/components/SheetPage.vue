@@ -1,10 +1,12 @@
 <script lang="ts" setup>
-import { computed, onMounted } from 'vue';
+import { computed, markRaw, onMounted } from 'vue';
 import { Actions } from '@/store';
 import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import Card from '@/components/common/Card.vue';
 import ShortcutItem from '@/components/ShortcutItem.vue';
+import ShortcutForm from '@/components/ShortcutForm.vue';
+import { DrawerMutations } from '@/stores/drawer.store';
 
 const store = useStore();
 const route = useRoute();
@@ -14,6 +16,20 @@ const sheet = computed(() => store.state.sheet);
 onMounted(() => {
   store.dispatch(Actions.GetSheet, parseInt(`${route.params.id}`));
 });
+
+const addShortCut = () => {
+  store.commit(DrawerMutations.OpenDrawer, {
+    drawer: markRaw(ShortcutForm),
+    data: {
+      shortCut: {
+        description: '',
+        key: '',
+        location: '',
+      },
+      isAdd: true,
+    },
+  });
+};
 </script>
 <template>
   <Card v-if="sheet">
@@ -23,5 +39,8 @@ onMounted(() => {
         <ShortcutItem :shortCut="shortCut" />
       </li>
     </ul>
+    <button class="option" type="button" @click="addShortCut">
+      Add shortcut
+    </button>
   </Card>
 </template>

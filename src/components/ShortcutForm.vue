@@ -19,12 +19,16 @@ let shortCut = reactive<ShortCut>({ ...data.shortCut });
 // const $v = useVuelidate(userValidations, profile);
 
 const submit = () => {
-  store.dispatch(Actions.UpdateShortcut, shortCut);
+  if (shortCut.id) {
+    store.dispatch(Actions.UpdateShortcut, shortCut);
+  } else {
+    store.dispatch(Actions.CreateShortcut, shortCut);
+  }
 };
 </script>
 <template>
   <div class="drawer-content">
-    <h2>Edit Shortcut</h2>
+    <h2>{{ data.isAdd ? 'Add' : 'Edit' }} Shortcut</h2>
     <form class="form" @submit.prevent="submit">
       <Field label="Description" v-model="shortCut.description" />
       <FieldSwitch label="CTRL" v-model="shortCut.controlKey" />
@@ -35,7 +39,9 @@ const submit = () => {
       <Field label="Location" v-model="shortCut.location" />
       <div class="buttons">
         <button class="cancel" type="button">Cancel</button>
-        <button class="confirm" type="submit">Edit</button>
+        <button class="confirm" type="submit">
+          {{ data.isAdd ? 'Add' : 'Edit' }}
+        </button>
       </div>
     </form>
   </div>

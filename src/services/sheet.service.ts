@@ -71,6 +71,21 @@ class SheetService extends BaseService {
     shortCut: ShortCut,
   ): Promise<DataResponse<Sheet>> {
     const res = await this.$http.post<Sheet>(
+      `${this.url}/${sheet.id}`,
+      shortCut,
+    );
+    this.clearCache();
+    return {
+      status: res.status === Status.Ok,
+      data: res.data,
+    };
+  }
+
+  public async putShortCut(
+    sheet: Sheet,
+    shortCut: ShortCut,
+  ): Promise<DataResponse<Sheet>> {
+    const res = await this.$http.put<Sheet>(
       `${this.url}/${sheet.id}/${shortCut.id}`,
       shortCut,
     );
