@@ -6,6 +6,7 @@ import {
   MessageData,
 } from '@/core/services/base.service';
 import { Sheet } from '@/models/sheet.model';
+import { ShortCut } from '@/models/shortcut.model';
 
 class SheetService extends BaseService {
   private url: string = '/api/sheets';
@@ -58,6 +59,21 @@ class SheetService extends BaseService {
 
   public async post(sheet: Sheet): Promise<DataResponse<Sheet>> {
     const res = await this.$http.post<Sheet>(this.url, sheet);
+    this.clearCache();
+    return {
+      status: res.status === Status.Ok,
+      data: res.data,
+    };
+  }
+
+  public async postShortCut(
+    sheet: Sheet,
+    shortCut: ShortCut,
+  ): Promise<DataResponse<Sheet>> {
+    const res = await this.$http.post<Sheet>(
+      `${this.url}/${sheet.id}/${shortCut.id}`,
+      shortCut,
+    );
     this.clearCache();
     return {
       status: res.status === Status.Ok,

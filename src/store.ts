@@ -6,6 +6,7 @@ import { Sheet } from './models/sheet.model';
 import { Notification } from './models/notification.model';
 // services
 import sheetService from './services/sheet.service';
+import { ShortCut } from './models/shortcut.model';
 
 export interface SSGState {
   sheet: Sheet | null;
@@ -23,6 +24,7 @@ export enum Mutations {
 export enum Actions {
   GetSheets = 'getSheets',
   GetSheet = 'getSheet',
+  UpdateShortcut = 'updateShortcut',
 }
 
 export const store = createStore<SSGState>({
@@ -68,6 +70,10 @@ export const store = createStore<SSGState>({
       const res = await sheetService.getList();
 
       commit(Mutations.SetSheets, res.data);
+    },
+    [Actions.UpdateShortcut]: async ({ state, commit }, shortCut: ShortCut) => {
+      const res = await sheetService.postShortCut(state.sheet!, shortCut);
+      commit(Mutations.SetSheet, res.data);
     },
   },
   getters: {},
