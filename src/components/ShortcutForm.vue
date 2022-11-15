@@ -31,8 +31,8 @@ const submit = () => {
 </script>
 <template>
   <div class="drawer-content">
-    <h2>{{ data.isAdd ? 'Add' : 'Edit' }} Shortcut</h2>
     <form class="form" @submit.prevent="submit">
+      <h2>{{ data.isAdd ? 'Add' : 'Edit' }} Shortcut</h2>
       <Field label="Description" v-model="shortCut.description" />
       <FieldSwitch label="CTRL" v-model="shortCut.controlKey" />
       <FieldSwitch label="ALT" v-model="shortCut.altKey" />
