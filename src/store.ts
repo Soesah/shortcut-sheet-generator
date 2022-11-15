@@ -8,11 +8,13 @@ import { Notification } from './models/notification.model';
 import sheetService from './services/sheet.service';
 
 export interface SSGState {
+  sheet: Sheet | null;
   sheets: Sheet[];
   notifications: Notification[];
 }
 
 export enum Mutations {
+  SetSheet = 'setSheet',
   SetSheets = 'setSheets',
   ShowNotification = 'showNotification',
   DismissNotification = 'dismissNotification',
@@ -20,6 +22,7 @@ export enum Mutations {
 
 export enum Actions {
   GetSheets = 'getSheets',
+  GetSheet = 'getSheet',
 }
 
 export const store = createStore<SSGState>({
@@ -28,10 +31,14 @@ export const store = createStore<SSGState>({
     ms: modalStore,
   },
   state: {
+    sheet: null,
     sheets: [],
     notifications: [],
   },
   mutations: {
+    [Mutations.SetSheet]: (state: SSGState, sheet: Sheet | null) => {
+      state.sheet = sheet;
+    },
     [Mutations.SetSheets]: (state: SSGState, sheets: Sheet[]) => {
       state.sheets = sheets;
     },
@@ -46,6 +53,17 @@ export const store = createStore<SSGState>({
     },
   },
   actions: {
+    [Actions.GetSheet]: async ({ state, commit }, id: number) => {
+      if (state.sheets.length === 0) {
+        const res = await sheetService.getList();
+
+        commit(Mutations.SetSheets, res.data);
+      }
+      commit(
+        Mutations.SetSheet,
+        state.sheets.find((sheet) => sheet.id === id) || null,
+      );
+    },
     [Actions.GetSheets]: async ({ commit }) => {
       const res = await sheetService.getList();
 

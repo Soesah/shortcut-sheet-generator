@@ -4,6 +4,7 @@
 @import 'card.less';
 @import 'drawer.less';
 @import 'tooltip.less';
+@import 'list.less';
 
 html, body {
   padding: 0;
@@ -18,4 +19,35 @@ body {
 main {
   max-width: 80%;
   margin: 0 auto;
+}
+
+
+.shortcut-item {
+  display: flex;
+  margin-bottom: @size-small;
+
+  .keys {
+    min-width: 200px;
+
+  }
+
+  h4 {
+
+  }
+}
+
+
+.key {
+  border: solid 1px desaturate(darken(rgb(254, 243, 200), 20%), 80%);
+  border-top-color: desaturate(darken(rgb(254, 243, 200), 5%), 80%);
+  border-left-color: desaturate(darken(rgb(254, 243, 200), 5%), 80%);
+  background-color: rgb(254, 243, 200);
+  display: inline-block;
+  padding: @size-tiny @size-mini;
+  border-radius: @size-mini;
+  min-width: 24px;
+  min-height: 24px;
+  line-height: 24px;
+  text-align: center;
+  .font-bold()
 }

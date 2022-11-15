@@ -1,6 +1,8 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Card from '@/components/common/Card.vue';
+</script>
 <template>
-  <div>
+  <Card>
     <h2>Sheet form</h2>
-  </div>
+  </Card>
 </template>
