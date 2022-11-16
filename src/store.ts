@@ -24,6 +24,8 @@ export enum Mutations {
 export enum Actions {
   GetSheets = 'getSheets',
   GetSheet = 'getSheet',
+  CreateSheet = 'createSheet',
+  UpdateSheet = 'updateSheet',
   CreateShortcut = 'createShortcut',
   UpdateShortcut = 'updateShortcut',
 }
@@ -78,6 +80,14 @@ export const store = createStore<SSGState>({
       const res = await sheetService.getList();
 
       commit(Mutations.SetSheets, res.data);
+    },
+    [Actions.CreateSheet]: async ({ commit }, sheet: Sheet) => {
+      const res = await sheetService.post(sheet);
+      commit(Mutations.SetSheet, res.data);
+    },
+    [Actions.UpdateSheet]: async ({ commit }, sheet: Sheet) => {
+      const res = await sheetService.put(sheet);
+      commit(Mutations.SetSheet, res.data);
     },
     [Actions.CreateShortcut]: async ({ state, commit }, shortCut: ShortCut) => {
       const res = await sheetService.postShortCut(state.sheet!, shortCut);

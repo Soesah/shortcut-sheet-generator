@@ -48,8 +48,8 @@ class SheetService extends BaseService {
     };
   }
 
-  public async put(sheet: Sheet): Promise<DataResponse<Sheet>> {
-    const res = await this.$http.put<Sheet>(`${this.url}/${sheet.id}`, sheet);
+  public async post(sheet: Sheet): Promise<DataResponse<Sheet>> {
+    const res = await this.$http.post<Sheet>(this.url, sheet);
     this.clearCache();
     return {
       status: res.status === Status.Ok,
@@ -57,8 +57,8 @@ class SheetService extends BaseService {
     };
   }
 
-  public async post(sheet: Sheet): Promise<DataResponse<Sheet>> {
-    const res = await this.$http.post<Sheet>(this.url, sheet);
+  public async put(sheet: Sheet): Promise<DataResponse<Sheet>> {
+    const res = await this.$http.put<Sheet>(`${this.url}/${sheet.id}`, sheet);
     this.clearCache();
     return {
       status: res.status === Status.Ok,
