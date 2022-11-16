@@ -21,6 +21,7 @@ html, body {
 body {
   padding: @size-medium;
   .font-default();
+  font-size: 0.9em;
 }
 
 main {
@@ -52,5 +53,19 @@ main {
   min-height: 24px;
   line-height: 24px;
   text-align: center;
-  .font-bold()
+  .font-bold();
+
+  & + .key:not(:last-child) {
+    margin-left: 2px;
+  }
+
+  &.controlKey {
+    .font-default();
+    font-size: 0.7em;
+    min-width: 18px;
+    min-height: 18px;
+    line-height: 18px;
+    position: relative;
+    top: -2px;
+  }
 }

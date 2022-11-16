@@ -24,10 +24,10 @@ const editShortCut = () => {
 <template>
   <div class="shortcut-item">
     <div class="keys" @click="editShortCut">
-      <Key v-if="shortCut.controlKey" value="CTRL" />
-      <Key v-if="shortCut.altKey" value="ALT" />
-      <Key v-if="shortCut.shiftKey" value="SHIFT" />
-      <Key v-if="shortCut.commandKey" value="CMD" />
+      <Key v-if="shortCut.controlKey" value="CTRL" control-key />
+      <Key v-if="shortCut.altKey" value="ALT" control-key />
+      <Key v-if="shortCut.shiftKey" value="SHIFT" control-key />
+      <Key v-if="shortCut.commandKey" value="CMD" control-key />
       {{
         shortCut.controlKey ||
         shortCut.altKey ||
