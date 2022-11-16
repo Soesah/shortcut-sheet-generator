@@ -21,7 +21,7 @@ const emit = defineEmits(['close']);
 // const $v = useVuelidate(userValidations, profile);
 
 const submit = () => {
-  if (shortCut.id) {
+  if (shortCut.id !== undefined) {
     store.dispatch(Actions.UpdateShortcut, shortCut);
   } else {
     store.dispatch(Actions.CreateShortcut, shortCut);

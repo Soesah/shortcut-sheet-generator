@@ -2,6 +2,8 @@
 import { getMessage } from '@/core/validation';
 import { FieldComposable, fieldProps } from './field.composable';
 import Message from '@/components/common/Message.vue';
+import CheckboxIcon from '../icons/CheckboxIcon.vue';
+import CheckboxOutlineIcon from '../icons/CheckboxOutlineIcon.vue';
 
 const {
   modelValue,
@@ -61,8 +63,18 @@ const { fieldValue, update, name } = FieldComposable<boolean>(
         :disabled="disabled"
         :name="name"
       />
-      <span v-if="fieldValue" class="icon icon-checkbox-checked"></span>
-      <span v-if="!fieldValue" class="icon icon-checkbox-unchecked"></span>
+      <CheckboxIcon
+        v-if="fieldValue"
+        :width="20"
+        :height="20"
+        class="icon icon-checkbox-checked"
+      ></CheckboxIcon>
+      <CheckboxOutlineIcon
+        v-if="!fieldValue"
+        :width="20"
+        :height="20"
+        class="icon icon-checkbox-unchecked"
+      ></CheckboxOutlineIcon>
       <span class="label-text" v-text="label"></span>
     </label>
     <message
