@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/Soesah/shortcut-sheet-generator/api/models"
+	"github.com/Soesah/shortcut-sheet-generator/api/pdf"
 	"github.com/Soesah/shortcut-sheet-generator/api/sheets"
 	"github.com/Soesah/shortcut-sheet-generator/server/httpext"
 	"github.com/go-chi/chi"
@@ -85,8 +86,12 @@ func AddShortCut(w http.ResponseWriter, r *http.Request) {
 
 func UpdateShortCut(w http.ResponseWriter, r *http.Request) {
 	sheetID, err := strconv.Atoi(chi.URLParam(r, "sheetID"))
-	shortCutID, err := strconv.Atoi(chi.URLParam(r, "shortCutID"))
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
+	shortCutID, err := strconv.Atoi(chi.URLParam(r, "shortCutID"))
 	if err != nil {
 		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -104,4 +109,34 @@ func UpdateShortCut(w http.ResponseWriter, r *http.Request) {
 	}
 
 	httpext.JSON(w, ss)
+}
+
+func DownloadSheet(w http.ResponseWriter, r *http.Request) {
+	sheetID, err := strconv.Atoi(chi.URLParam(r, "sheetID"))
+
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	sheet, err := sheets.GetSheet(int64(sheetID), r)
+
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	pdf, err := pdf.GeneratePDF(sheet)
+
+	if err != nil {
+		httpext.AbortAPI(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	w.Header().Add("Content-Type", "application/pdf")
+	// w.Header().Add(
+	// 	"Content-Disposition",
+	// 	"filename.pdf",
+	// )
+	w.Write(pdf)
 }

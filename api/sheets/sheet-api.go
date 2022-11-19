@@ -11,6 +11,26 @@ var (
 	errCreateInvalidSheet = errors.New("could not create sheet, data is invalid")
 )
 
+// GetSheet returns a list of sheets
+func GetSheet(id int64, r *http.Request) (models.Sheet, error) {
+	var s models.Sheet
+
+	c := Controller{}
+	err := c.Load(r)
+
+	if err != nil {
+		return s, err
+	}
+
+	s, err = c.GetSheet(id)
+
+	if err != nil {
+		return s, err
+	}
+
+	return s, nil
+}
+
 // GetList returns a list of sheets
 func GetList(r *http.Request) ([]models.Sheet, error) {
 	var ps []models.Sheet

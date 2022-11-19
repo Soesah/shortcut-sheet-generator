@@ -40,6 +40,7 @@ func main() {
 				r.Put("/{sheetID}", handlers.UpdateSheet)
 				r.Post("/{sheetID}", handlers.AddShortCut)
 				r.Put("/{sheetID}/{shortCutID}", handlers.UpdateShortCut)
+				r.Get("/{sheetID}/download", handlers.DownloadSheet)
 			})
 		})
 
