@@ -77,7 +77,7 @@ func GeneratePDF(sheet models.Sheet) ([]byte, error) {
 
 		m.Row(7, func() {
 
-			m.Col(3, func() {
+			m.Col(2, func() {
 				if shortCut.ControlKey {
 					m.SetBackgroundColor(color.Color{Red: 254, Green: 243, Blue: 200})
 					m.Text("CTRL", props.Text{
@@ -115,8 +115,14 @@ func GeneratePDF(sheet models.Sheet) ([]byte, error) {
 					Style: consts.Bold,
 				})
 			})
-			m.Col(9, func() {
+			m.Col(6, func() {
 				m.Text(shortCut.Description, props.Text{
+					Size: 12,
+					Top:  1,
+				})
+			})
+			m.Col(4, func() {
+				m.Text(shortCut.Location, props.Text{
 					Size: 12,
 					Top:  1,
 				})
